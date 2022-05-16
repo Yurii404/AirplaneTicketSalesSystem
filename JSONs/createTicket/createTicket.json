@@ -1,0 +1,21 @@
+{
+  "users": {
+    "login": "Test"
+  },
+  "flight": {
+    "number": "1111",
+  },
+  "seat": {
+    "number": "12",
+  },
+  "ticket": {
+    "number": "123",
+    "fullName": null,
+    "price": "1000",
+    "weightOfLuggage": null,
+    "weightOfBuggage": null,
+    "numOfParkingPlaces": null,
+    "dateTimeLastEdit": "2021-08-04 12:15:00",
+    "status": "free",
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "users": {
+    "login": "Test"
+  },
+  "seat": {
+    "number": "12",
+    "status": "Free",
+    "price": "20",
+    "class": "Low",
+  },
+  "airplane": {
+    "code": "BD220",
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "guest": {
+    "ip": "114.40.118.127",
+    "dateTimeOfStart": "2021-08-08 12:15:02"
+  },
+  "users": {
+    "fullName": "Test",
+    "login": "Test",
+    "email": "test@test.ua",
+    "phoneNumber": "+380731111111",
+    "hashOfPassport": "rjdtkm343",
+    "dateTimeRegistration": "2021-08-05 12:15:02",
+    "dateTimeLastVisit": "2021-08-08 12:15:02",
+  },
+  
+}

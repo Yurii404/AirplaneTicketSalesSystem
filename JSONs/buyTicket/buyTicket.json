@@ -1,0 +1,12 @@
+{
+  "users": {
+    "login": "Test"
+  },
+  "ticket": {
+    "number": "1111",
+    "fullName": "Test test",
+    "weightOfLuggage": "2",
+    "weightOfCarryOn": "1",
+    "numOfParkingPlaces": "1"
+  }
+}

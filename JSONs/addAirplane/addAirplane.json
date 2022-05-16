@@ -1,0 +1,13 @@
+{
+  "users": {
+    "login": "Test"
+  },
+  "airplane": {
+    "code": "BD220",
+    "name": "Mriya",
+    "numOfSeats": "50",
+    "maxWeightOfLuggage": "15",
+    "maxWeightOfCarryOn": "5",
+    "priceOfLuggage": "150",
+  }
+}

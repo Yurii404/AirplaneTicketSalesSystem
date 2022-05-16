@@ -1,0 +1,9 @@
+{
+  "guest": {
+    "ip": "128.17.01.112"
+  },
+  "users": {
+    "login": "test@test.ua",
+    "hashOfPassport": "rjdtkm343"
+  }
+}

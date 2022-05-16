@@ -1,0 +1,10 @@
+{
+  "systemRoles":[
+    {
+      "Name" : "Administrator"
+    },
+    {
+      "Name" : "Client"
+    }
+  ]
+}

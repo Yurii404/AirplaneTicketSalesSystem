@@ -1,0 +1,9 @@
+{
+  "airport": {
+    "code": "LVL",
+    "name": "Grand Lviv",
+    "city": "1",
+    "country": "1",
+    "numOfTerminals": "4"
+  }
+}
