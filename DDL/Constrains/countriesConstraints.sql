@@ -1,0 +1,1 @@
+call uspAddAlterKey('countries', 'ak_countries_name', 'name');

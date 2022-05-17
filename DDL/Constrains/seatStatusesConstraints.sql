@@ -1,0 +1,1 @@
+call uspAddAlterKey('seat_statuses', 'ak_seat_statuses_name', 'name');

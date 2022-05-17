@@ -6,9 +6,9 @@
     "number": "12",
     "status": "Free",
     "price": "20",
-    "class": "Low",
+    "class": "Low"
   },
   "airplane": {
-    "code": "BD220",
+    "code": "BD220"
   }
 }

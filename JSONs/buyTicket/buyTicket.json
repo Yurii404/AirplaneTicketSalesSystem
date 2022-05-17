@@ -3,7 +3,9 @@
     "login": "Test"
   },
   "ticket": {
-    "number": "1111",
+    "number": "1111"
+  }
+  "user_info": {
     "fullName": "Test test",
     "weightOfLuggage": "2",
     "weightOfCarryOn": "1",

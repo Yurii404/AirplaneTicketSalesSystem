@@ -1,0 +1,1 @@
+call uspAddAlterKey('airplane', 'ak_airplane_code', 'code');

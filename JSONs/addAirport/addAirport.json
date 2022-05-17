@@ -1,9 +1,12 @@
 {
+  "users": {
+    "login": "Test"
+  },
   "airport": {
     "code": "LVL",
     "name": "Grand Lviv",
-    "city": "1",
-    "country": "1",
+    "city": "Lviv",
+    "country": "Ukraine",
     "numOfTerminals": "4"
   }
 }

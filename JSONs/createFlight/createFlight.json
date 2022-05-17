@@ -3,18 +3,18 @@
     "login": "Test"
   },
   "airplane": {
-    "code": "BD220",
+    "code": "BD220"
   },
   "arrivalAirport": {
-    "code": "LVL",
+    "code": "LVL"
   },
   "departureAirport": {
-    "code": "KYV",
+    "code": "KYV"
   },
   "flight": {
     "number": "1111",
     "dateTimeArrival": "2021-08-04 12:15:00",
     "dateTimeDeparture": "2021-08-03 12:15:00",
-    "flightTime": "655",
+    "flightTime": "655"
   }
 }
