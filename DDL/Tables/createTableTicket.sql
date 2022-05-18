@@ -12,7 +12,7 @@ create table ticket(
     seat_id                int          not null,
     flight_id              int          not null,
     price                  int          not null,
-    status_id              int          not null,
+    status_id              tinyint      not null,
     datetime_last_edit     datetime     not null,
     creator_id             int          not null,
    	

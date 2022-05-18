@@ -8,8 +8,8 @@ create table users(
     login                   varchar(20)   not null,
     hash_of_password        varchar(16)   not null,
     phone_number            varchar(25),
-    email			        varchar(40)   unique,
-    role_id			        int			  not null,
+    email			        varchar(60),
+    role_id			        tinyint	      not null,
     datetime_registration   datetime      not null,
     datetime_last_visit     datetime      not null,
    	
