@@ -5,7 +5,7 @@ drop table if exists users;
 create table users(
 	user_id 		        int           not null auto_increment,
     full_name               varchar(30)   not null,   
-    login                   varchar(20)   not null unique,
+    login                   varchar(20)   not null,
     hash_of_password        varchar(16)   not null,
     phone_number            varchar(25),
     email			        varchar(40)   unique,

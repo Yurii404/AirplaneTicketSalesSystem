@@ -4,7 +4,7 @@ drop table if exists airport;
 
 create table airport(
 	airport_id     int            not null auto_increment,
-	`code`         varchar(3)   not null,
+	`code`         varchar(3)     not null,
 	`name`         varchar(20)    not null,
     city_id        int            not null,
     country_id     int            not null,
