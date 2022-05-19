@@ -1,6 +1,6 @@
 {
   "users": {
-    "login": "Test"
+    "login": "Admin"
   },
   "flight": {
     "number": "1111"
@@ -10,11 +10,8 @@
   },
   "ticket": {
     "number": "123",
-    "fullName": null,
     "price": "1000",
-    "weightOfLuggage": null,
-    "weightOfBuggage": null,
-    "numOfParkingPlaces": null,
+    "status" "free",
     "dateTimeLastEdit": "2021-08-04 12:15:00"
   }
 }

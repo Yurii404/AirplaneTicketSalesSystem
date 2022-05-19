@@ -1,10 +1,6 @@
 {
-  "countries":[
+  "countries":
     {
       "Name" : "Ukraine"
-    },
-    {
-      "Name" : "France"
     }
-  ]
 }

@@ -1,10 +1,7 @@
 {
-  "seatStatuses":[
-    {
-      "Name" : "Free"
-    },
+  "seatStatuses":
     {
       "Name" : "Booked"
     }
-  }
+  
 }

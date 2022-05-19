@@ -7,6 +7,15 @@ delimiter $$
 create procedure uspParsingAddCities(in addCitiesJson json)
 begin
 
+		declare exit handler for sqlexception
+		 begin
+			-- error message output
+			get diagnostics @p1 = number;
+			get diagnostics condition @p1 @p2 = message_text;
+			select @p1, @p2;
+
+		end;
+		
 		drop table if exists tempJson;
 		create temporary table tempJson
 		(

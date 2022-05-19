@@ -1,13 +1,13 @@
 use booking_system;
 
-drop procedure if exists uspParsingAddSystemRoles;
+drop procedure if exists uspParsingAddSeatClasses;
  
 delimiter $$
 
-create procedure uspParsingAddSystemRoles(in addSystemRolesJson json)
+create procedure uspParsingAddSeatClasses(in addSeatClassesJson json)
 begin
 
-		 declare exit handler for sqlexception
+		declare exit handler for sqlexception
 		 begin
 			-- error message output
 			get diagnostics @p1 = number;
@@ -26,13 +26,13 @@ begin
 		insert into tempJson(
 						`name`
 					)
-		select new_system_roles.`name`
-		from json_table(addSystemRolesJson, '$."systemRoles"' columns (
+		select new_seat_classes.`name`
+		from json_table(addSeatClassesJson, '$."seatClasses"' columns (
 					`name`		varchar(25)		path '$.name'
 				)
-             ) as new_system_roles;
+             ) as new_seat_classes;
         
-        insert into system_roles (`name`)
+        insert into seat_classes (`name`)
 		select tempJson.`name`
 		from tempJson;
         

@@ -1,16 +1,6 @@
 {
-  "ticketStatuses":[
+  "ticketStatuses":
     {
       "Name" : "Free"
-    },
-    {
-      "Name" : "Booked"
-    },
-    {
-      "Name" : "Paid"
-    },
-    {
-      "Name" : "Canceled"
-    },
-  ]
+    }
 }
