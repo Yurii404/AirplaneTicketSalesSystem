@@ -15,6 +15,7 @@ begin
 			get diagnostics condition @p1 @p2 = message_text;
 			select @p1, @p2;
 
+			rollback;
 		end;
 
 		drop table if exists tempJson;
@@ -53,15 +54,7 @@ begin
 				)
              ) as new_airport;
         
-        if not exists (select user_id from users where role_id = (
-						select role_id from system_roles where `name` = "Administrator"))
-		then
-        -- error message output
-        select 'This can do only administartor';
-
-        -- exit parser procedure 
-        leave proc_body;
-		end if;
+       
         
         start transaction;
         
@@ -79,7 +72,10 @@ begin
                 tempJson.num_of_terminals
 		from tempJson
         inner join cities ON cities.`name` = tempJson.city
-        inner join countries ON countries.`name` = tempJson.country;
+        inner join countries ON countries.`name` = tempJson.country
+		inner join users on (users.login = tempJson.user_login)
+        inner join system_roles on (users.role_id = system_roles.role_id)
+        where system_roles.`name` = "Administrator";
         
         commit;
 end$$

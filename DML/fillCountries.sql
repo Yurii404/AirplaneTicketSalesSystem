@@ -11,3 +11,9 @@ call uspParsingAddCountries('{
   	"name": "France"
   }
 }');
+
+call uspParsingAddCountries('{
+  "countries": {
+  	"name": "United Kingdom"
+  }
+}');

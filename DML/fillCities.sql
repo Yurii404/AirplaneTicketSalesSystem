@@ -1,10 +1,5 @@
 use booking_system;
 
-call uspParsingAddCities('{
-  "cities": {
-  	"name": "Novovolunsk"
-  }
-}');
 
 call uspParsingAddCities('{
   "cities": {
@@ -15,5 +10,17 @@ call uspParsingAddCities('{
 call uspParsingAddCities('{
   "cities": {
   	"name": "Kiev"
+  }
+}');
+
+call uspParsingAddCities('{
+  "cities": {
+  	"name": "Paris"
+  }
+}');
+
+call uspParsingAddCities('{
+  "cities": {
+  	"name": "London"
   }
 }');

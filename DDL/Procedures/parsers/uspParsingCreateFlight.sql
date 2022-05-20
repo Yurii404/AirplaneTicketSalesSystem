@@ -66,15 +66,6 @@ begin
         
         start transaction;
         
-        if not exists (select user_id from users where role_id = (
-						select role_id from system_roles where `name` = "Administrator"))
-		then
-        -- error message output
-        select 'This can do only administartor';
-
-        -- exit parser procedure 
-        leave proc_body;
-		end if;
         
         
         -- insert new user
@@ -96,7 +87,10 @@ begin
 		from tempJson
         inner join airplane ON airplane.`code` = tempJson.airplane_code
         inner join airport as departure_airport ON departure_airport.`code` = tempJson.departure_airport_code
-        inner join airport as arrival_airport ON arrival_airport.`code` = tempJson.arrival_airport_code;
+        inner join airport as arrival_airport ON arrival_airport.`code` = tempJson.arrival_airport_code
+		inner join users on (users.login = tempJson.user_login)
+        inner join system_roles on (users.role_id = system_roles.role_id)
+        where system_roles.`name` = "Administrator";
         
         
         commit;

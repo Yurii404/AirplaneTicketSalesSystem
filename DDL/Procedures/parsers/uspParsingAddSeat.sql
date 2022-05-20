@@ -58,16 +58,6 @@ begin
         
         start transaction;
         
-        if not exists (select user_id from users where role_id = (
-						select role_id from system_roles where `name` = "Administrator"))
-		then
-        -- error message output
-        select 'This can do only administartor';
-
-        -- exit parser procedure 
-        leave proc_body;
-		end if;
-        
         
         -- insert new user
         insert into seat ( `number`, 
@@ -83,7 +73,10 @@ begin
 		from tempJson
         inner join airplane ON airplane.`code` = tempJson.airplane_code
         inner join seat_classes ON seat_classes.`name` = tempJson.seat_class
-        inner join seat_statuses ON seat_statuses.`name` = tempJson.seat_status;
+        inner join seat_statuses ON seat_statuses.`name` = tempJson.seat_status
+		inner join users on (users.login = tempJson.user_login)
+        inner join system_roles on (users.role_id = system_roles.role_id)
+        where system_roles.`name` = "Administrator";
         
         commit;
 	
