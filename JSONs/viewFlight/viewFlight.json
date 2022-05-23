@@ -1,0 +1,10 @@
+{
+  "users": {
+    "login": "Admin"
+  },
+  "filter": {
+    "fromDateTimeDeparture": "2022-08-04 12:15:00",
+    "departureCities": ["Kiev", "Lviv"],
+    "arrivalCity": "Paris"
+  }
+}

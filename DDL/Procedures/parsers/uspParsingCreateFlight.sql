@@ -30,8 +30,7 @@ begin
         flight_number					int,
         flight_datetime_arrival			datetime,
         flight_datetime_departure		datetime,
-        flight_flight_time				int
-        
+        flight_flight_time				time
 		);
 
 		insert into tempJson(user_login ,
@@ -60,7 +59,7 @@ begin
 					flight_number					int				path '$.flight.number',
 					flight_datetime_arrival			datetime		path '$.flight.dateTimeArrival',
 					flight_datetime_departure		datetime		path '$.flight.dateTimeDeparture',
-					flight_flight_time				int				path '$.flight.flightTime'
+					flight_flight_time				time			path '$.flight.flightTime'
 				)
              ) as new_flight;
         
@@ -68,7 +67,7 @@ begin
         
         
         
-        -- insert new user
+        -- insert
         insert into flight ( `number`,
 							airplane_id,
                             datetime_departure,
