@@ -56,7 +56,7 @@ begin
                 order by datetime_departure ASC;';
 
 		
-		if exists (select * from tempJson where departureCity is not null) 
+		if exists (select departureCity from tempJson where departureCity is not null) 
 		then
 				set @DepartureCity = '= tempJson.departureCity';
 		else
@@ -64,14 +64,14 @@ begin
         end if;
 
 
-		if exists (select * from tempJson where arrivalCity is not null) 
+		if exists (select arrivalCity from tempJson where arrivalCity is not null) 
 		then
 				set @ArrivalCity = '= tempJson.arrivalCity';
 		else
 				set @ArrivalCity = 'in (select name from cities)';
         end if;
         
-        if exists (select * from tempJson where fromDatetimaDeparture is not null) 
+        if exists (select fromDatetimaDeparture from tempJson where fromDatetimaDeparture is not null) 
 		then
 				set @WhereQuery = 'where DATE(datetime_departure) > DATE(tempJson.fromDatetimaDeparture)
                 AND flight.departure_airport_id = departureAirport.airport_id  

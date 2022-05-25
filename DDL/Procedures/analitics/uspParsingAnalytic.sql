@@ -120,30 +120,38 @@ begin
 	if (select distinct tempJson.showNullRows from tempJson)
 		then
 			
-			select "Pam pam";
+				-- insert data for all categories values
+			insert into tempRawData (city, airplane)
+			select cities.`name`,
+				   tempAirplanes.airplane
+			from tempAirplanes left outer join
+				 (ticket inner join flight on ticket.flight_id = flight.flight_id
+                    inner join airplane on airplane.airplane_id = flight.airplane_id
+                    inner join airport on flight.departure_airport_id = airport.airport_id
+												OR flight.arrival_airport_id = airport.airport_id
+                    inner join cities on cities.city_id = airport.city_id
+                    inner join ticket_statuses on ticket_statuses.status_id = ticket.status_id
+                    inner join tempCities on tempCities.city = cities.`name`) on (tempAirplanes.airplane = airplane.`name`)
+			where (flight.datetime_departure between @start_date and @end_date 
+					AND ticket_statuses.`name` in ("booked", "paid") 
+                    OR cities.city_id is null);
 	
-		else
+	else
 	
 		insert into tempRawData (city, airplane)
-			select tempCities.city,
-				tempAirplanes.airplane
-			from  ticket 
-				inner join tempCities
-				inner join tempAirplanes
-                inner join ticket_statuses 	on ticket_statuses.`name` = "booked" 
-												OR ticket_statuses.`name` = "paid"
-				inner join cities 			on tempCities.city = cities.`name`
-				inner join airport 			on (airport.city_id = cities.city_id)
-				inner join flight			on (flight.departure_airport_id = airport.airport_id) 
-												OR (flight.arrival_airport_id = airport.airport_id)
-				inner join airplane 		on (airplane.airplane_id = flight.airplane_id) 
-												AND (airplane.`name` = tempAirplanes.airplane)
-			where (flight.datetime_departure between @start_date and @end_date) 
-												AND ticket.flight_id = flight.flight_id 
-												AND ticket.status_id = ticket_statuses.status_id;
+			select cities.`name`,
+				   tempAirplanes.airplane
+			from tempAirplanes inner join
+				 (ticket inner join flight on ticket.flight_id = flight.flight_id
+                    inner join airplane on airplane.airplane_id = flight.airplane_id
+                    inner join airport on flight.departure_airport_id = airport.airport_id
+												OR flight.arrival_airport_id = airport.airport_id
+                    inner join cities on cities.city_id = airport.city_id
+                    inner join ticket_statuses on ticket_statuses.status_id = ticket.status_id
+                    inner join tempCities on tempCities.city = cities.`name`) on (tempAirplanes.airplane = airplane.`name`)
+			where (flight.datetime_departure between @start_date and @end_date 
+					AND ticket_statuses.`name` in ("booked", "paid"));
 
-            
-		
 	end if;
     
     select * from tempRawData;

@@ -6,7 +6,7 @@ call uspParsingViewFlight('{
   },
   "filter": {
     "fromDateTimeDeparture": "2020-12-10 00:00:00",
-    "departureCities": ["Kiev"],
+    "departureCities": ["Kiev", "Lviv"],
     "arrivalCity": "Paris"
   }
 }');
