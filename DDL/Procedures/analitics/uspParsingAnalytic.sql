@@ -130,12 +130,17 @@ begin
 			from  ticket 
 				inner join tempCities
 				inner join tempAirplanes
-				inner join cities 	on tempCities.city = cities.`name`
-				inner join airport 	on (airport.city_id = cities.city_id)
-				inner join flight	on (flight.departure_airport_id = airport.airport_id) 
-											OR (flight.arrival_airport_id = airport.airport_id)
-				inner join airplane  on (airplane.airplane_id = flight.airplane_id) AND (airplane.`name` = tempAirplanes.airplane)
-			where (flight.datetime_departure between @start_date and @end_date) AND ticket.flight_id = flight.flight_id;
+                inner join ticket_statuses 	on ticket_statuses.`name` = "booked" 
+												OR ticket_statuses.`name` = "paid"
+				inner join cities 			on tempCities.city = cities.`name`
+				inner join airport 			on (airport.city_id = cities.city_id)
+				inner join flight			on (flight.departure_airport_id = airport.airport_id) 
+												OR (flight.arrival_airport_id = airport.airport_id)
+				inner join airplane 		on (airplane.airplane_id = flight.airplane_id) 
+												AND (airplane.`name` = tempAirplanes.airplane)
+			where (flight.datetime_departure between @start_date and @end_date) 
+												AND ticket.flight_id = flight.flight_id 
+												AND ticket.status_id = ticket_statuses.status_id;
 
             
 		
