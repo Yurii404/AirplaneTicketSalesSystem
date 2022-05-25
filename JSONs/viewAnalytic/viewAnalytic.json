@@ -1,0 +1,8 @@
+{
+   "cities":["Kiev", "Lviv"],
+   "airplanes":["Mriya", "Star", "Mini"],
+   "periodStartDate":"2020-01-01 00:00:00",
+   "periodEndDate":"20202-12-30 00:00:00",
+   "showNullRows":false,
+   "showNullCols":true
+}

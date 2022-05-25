@@ -8,7 +8,7 @@ begin
     drop table if exists tempJson;
 	create temporary table tempJson (
 		user_login 				varchar(50),
-		fromDatetimaDeparture  	datetime default now(),
+		fromDatetimaDeparture  	datetime,
 		departureCity 			varchar(50),
 		arrivalCity			 	varchar(50)
 	);
@@ -35,8 +35,12 @@ begin
 
 					) as js;  
 						
-                            
-		set @ResultQuery = '
+		
+        
+        set @DepartureCity =  '';              
+        set @ArrivalCity =  '';              
+		set @WhereQuery = '';                   
+		set @ResultQuery := '
 			select  flight.`number`, 
 					flight.datetime_departure,
                     flight.datetime_arrival,
@@ -44,36 +48,46 @@ begin
 					arrivalCity.`name` as arrivalCity
 			from flight
 				inner join tempJson
-				inner join cities as departureCity on departureCity.`name` = tempJson.departureCity
-                inner join cities as arrivalCity on arrivalCity.`name` = tempJson.arrivalCity
-                where datetime_departure > tempJson.fromDatetimaDeparture
+				inner join cities as departureCity on departureCity.`name` {departureCity}   
+                inner join cities as arrivalCity on arrivalCity.`name` {arrivalCity}
+                inner join airport as departureAirport on departureAirport.city_id = departureCity.city_id
+                inner join airport as arrivalAirport on arrivalAirport.city_id = arrivalCity.city_id
+                {WhereQuery}
                 order by datetime_departure ASC;';
-                
+
+		
+		if exists (select * from tempJson where departureCity is not null) 
+		then
+				set @DepartureCity = '= tempJson.departureCity';
+		else
+				set @DepartureCity = 'in (select name from cities)';
+        end if;
+
+
+		if exists (select * from tempJson where arrivalCity is not null) 
+		then
+				set @ArrivalCity = '= tempJson.arrivalCity';
+		else
+				set @ArrivalCity = 'in (select name from cities)';
+        end if;
         
-       --  if exists (select * from tempJson where email is not null) 
-		-- then
--- 			if exists (select * from tempJson where rating is not null) 
--- 			then
--- 				select concat('where ', @Email, ' and ', @Rating)
--- 				into @WhereQuery;
--- 			else
--- 				select concat('where ', @Email)
--- 				into @WhereQuery;
--- 			end if;
--- 		else
--- 			if exists (select * from tempJson where rating is not null) 
--- 			then
--- 				select concat('where ', @Rating)
--- 				into @WhereQuery;
--- 			end if;
---         end if;
---         
---         set @ResultQuery := replace(@ResultQuery, '{WhereQuery}', @WhereQuery);
+        if exists (select * from tempJson where fromDatetimaDeparture is not null) 
+		then
+				set @WhereQuery = 'where DATE(datetime_departure) > DATE(tempJson.fromDatetimaDeparture)
+                AND flight.departure_airport_id = departureAirport.airport_id  
+                AND flight.arrival_airport_id = arrivalAirport.airport_id';
+		else
+				set @WhereQuery = 'where flight.departure_airport_id = departureAirport.airport_id  
+                AND flight.arrival_airport_id = arrivalAirport.airport_id';
+        end if;
+        
+		set @ResultQuery := replace(@ResultQuery, '{WhereQuery}', @WhereQuery);
+        set @ResultQuery := replace(@ResultQuery, '{departureCity}', @DepartureCity);
+        set @ResultQuery := replace(@ResultQuery, '{arrivalCity}', @ArrivalCity);
         
         prepare stmt from @ResultQuery;
 		execute stmt;
 		deallocate prepare stmt;
-
 
 end$$
 delimiter ;
