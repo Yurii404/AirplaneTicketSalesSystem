@@ -151,10 +151,51 @@ begin
                     inner join tempCities on tempCities.city = cities.`name`) on (tempAirplanes.airplane = airplane.`name`)
 			where (flight.datetime_departure between @start_date and @end_date 
 					AND ticket_statuses.`name` in ("booked", "paid"));
-
 	end if;
     
-    select * from tempRawData;
+     set @ResultQuery := '(select tempRawData.airplane as ''Airplane name'',
+                                          {ResultSubquery}
+                                   from tempRawData
+                                   group by tempRawData.airplane)
+                                 ';
+
+            set @ResultSubquery      := '';
+       
+            
+            if (select distinct tempJson.showNullCols from tempJson)
+            then
+                -- prepare columns with all values from Category2 data
+					 select GROUP_CONCAT(CONCAT('COUNT(if(tempRawData.city in (''',
+                                           tempCities.city,
+                                           '''), tempRawData.city, null)) as ''',
+                                           tempCities.city,
+                                           ''''))
+					into @ResultSubquery
+					from tempCities;
+
+            else
+                select GROUP_CONCAT(CONCAT('COUNT(if(tempRawData.city in (''',
+                                           tempCities.city,
+                                           '''), tempRawData.city, null)) as ''',
+                                           tempCities.city,
+                                           ''''))
+				into @ResultSubquery
+                from tempCities
+                where (tempCities.city in (select distinct tempRawData.city
+											from tempRawData
+											where (tempRawData.city is not null)));
+
+            end if;
+
+            set @ResultQuery := replace(@ResultQuery, '{ResultSubquery}',      @ResultSubquery);
+            
+
+            prepare stmt from @ResultQuery;
+            execute stmt;
+            deallocate prepare stmt;
+
+    -- successful end of transaction (if used transaction start)
+    commit;
     
 
 end$$

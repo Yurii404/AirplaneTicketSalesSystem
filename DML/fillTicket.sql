@@ -269,3 +269,21 @@ call uspParsingCreateTicket('{
     "dateTimeLastEdit": "2021-08-04 12:10:10"
   }
 }');
+
+call uspParsingCreateTicket('{
+  "users": {
+    "login": "Admin"
+  },
+  "flight": {
+    "number": "5555"
+  },
+  "seat": {
+    "number": "5"
+  },
+  "ticket": {
+    "number": "20",
+    "price": "1000",
+    "status" : "booked",
+    "dateTimeLastEdit": "2021-08-04 12:10:10"
+  }
+}');
