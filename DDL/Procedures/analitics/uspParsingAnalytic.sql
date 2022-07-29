@@ -189,7 +189,6 @@ begin
 
             set @ResultQuery := replace(@ResultQuery, '{ResultSubquery}',      @ResultSubquery);
             
-
             prepare stmt from @ResultQuery;
             execute stmt;
             deallocate prepare stmt;
